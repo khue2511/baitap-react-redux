@@ -13,9 +13,9 @@ interface Product {
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const url = 'https://673d96620118dbfe8607db5e.mockapi.io/api';
 
   const getProducts = async () => {
-    const url = 'https://673d96620118dbfe8607db5e.mockapi.io/api';
     try {
       const response: AxiosResponse<Product[]> = await axios.get(
         `${url}/products`,
@@ -31,9 +31,9 @@ const Products: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center m-auto">
-      <h1 className="text-3xl font-bold mt-8">Our Products</h1>
-      <div className='flex flex-row flex-wrap justify-between gap-y-8 w-10/12 mt-8 m-auto'>
+    <div className="flex flex-col items-center m-auto pb-12 pt-8 px-24">
+      <h1 className="text-3xl font-bold">Our Products</h1>
+      <div className="flex flex-wrap justify-between gap-x-5 gap-y-8 mt-8">
         {products.map((product) => (
           <ProductCard
             key={product.id}

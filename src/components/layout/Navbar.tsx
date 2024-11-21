@@ -25,6 +25,12 @@ function Navbar() {
         >
           Login
         </Link>
+        <Link
+          to="/cart"
+          className="hover:underline cursor-pointer"
+        >
+          Cart
+        </Link>
       </div>
     </div>
   );

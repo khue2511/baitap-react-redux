@@ -26,12 +26,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
           alt={name}
         ></img>
       </div>
-      <div className="flex flex-col p-4 gap-y-1">
-        <p className="text-3xl font-bold">${price}</p>
-        <h3 className="text-xl font-bold">{name}</h3>
-        <p>{description}</p>
+      <div className="flex flex-col p-4 gap-y-1 justify-between h-full">
+        <div>
+          <p className="text-3xl font-bold">${price}</p>
+          <h3 className="text-xl font-bold">{name}</h3>
+          <p>{description}</p>
+        </div>
         <div className="flex flex-row justify-between items-center">
-          <p className='text-sm'>Quantity: {quantity}</p>
+          <p className="text-sm">Quantity: {quantity}</p>
           <IconButton
             color="primary"
             aria-label="add to shopping cart"

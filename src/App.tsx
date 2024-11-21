@@ -4,6 +4,7 @@ import Login from './pages/login';
 import Layout from './components/layout';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Products from './pages/products';
+import Cart from './pages/cart';
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
           <Route
             path="/products"
             element={<Products />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart />}
           />
         </Routes>
       </Layout>
