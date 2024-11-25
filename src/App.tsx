@@ -7,6 +7,7 @@ import Cart from './pages/cart';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import ProtectedRoute from './utils/ProtectedRoute';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -49,6 +50,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

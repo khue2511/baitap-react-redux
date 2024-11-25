@@ -1,8 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginStart, loginSuccess, loginFailure } from '../../redux/authSlice';
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  resetError,
+} from '../../redux/authSlice';
 import { User } from '../../types/userTypes';
 import LoginIcon from '@mui/icons-material/Login';
 
@@ -14,6 +19,12 @@ function Login() {
     (state: RootState) => state.auth,
   );
   const url = 'https://dummyjson.com/auth/login';
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetError());
+    };
+  }, [dispatch]);
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +38,14 @@ function Login() {
       const data = response.data;
       dispatch(loginSuccess(data));
     } catch (error: any) {
-      dispatch(loginFailure(error.message));
+      if (error.response) {
+        const errorMessage = error.response.data.message || 'An error occurred';
+        dispatch(loginFailure(errorMessage));
+      } else if (error.request) {
+        dispatch(loginFailure('Network error, please try again.'));
+      } else {
+        dispatch(loginFailure('An unknown error occurred.'));
+      }
     }
   };
 
@@ -53,6 +71,7 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <p className="mt-2 text-rose-600">{error}</p>
           <button
             className={`mt-4 py-2 px-4 text-white ${loading ? 'bg-gray-500' : 'bg-black'}`}
           >
@@ -66,7 +85,7 @@ function Login() {
           </button>
         </form>
       ) : (
-        <h1 className='text-3xl mt-8'>
+        <h1 className="text-3xl mt-8">
           You are currently logged in as <b>{userInfo?.username}!</b>
         </h1>
       )}
