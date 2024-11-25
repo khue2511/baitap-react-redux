@@ -1,24 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface User {
-  accessToken: string;
-  refreshToken: string;
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-}
-
-interface UserInfo {
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-}
+import { User, UserInfo } from '../types/userTypes';
 
 interface AuthState {
   userInfo: UserInfo | null;
@@ -26,6 +7,7 @@ interface AuthState {
   loading: boolean;
   error: string | null;
   userToken: string | null;
+  // cart
 }
 
 const initialState: AuthState = {
@@ -34,6 +16,7 @@ const initialState: AuthState = {
   loading: false,
   error: null,
   userToken: null,
+  // cart: {items here}
 };
 
 const authSlice = createSlice({

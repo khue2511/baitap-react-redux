@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../../components/common/ProductCard';
 import axios, { AxiosResponse } from 'axios';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  description: string;
-  imageUrl: string;
-}
+import { Product } from '../../types/productTypes';
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
