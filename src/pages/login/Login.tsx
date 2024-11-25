@@ -1,5 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
+import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginStart, loginSuccess, loginFailure } from '../../redux/authSlice';
 
 interface UserInfo {
   accessToken: string;
@@ -16,10 +19,15 @@ interface UserInfo {
 function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const dispatch = useDispatch();
+  const { userInfo, isAuthenticated, loading, error, userToken } = useSelector(
+    (state: RootState) => state.auth,
+  );
   const url = 'https://dummyjson.com/auth/login';
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault();
+    dispatch(loginStart());
     try {
       const response: AxiosResponse<UserInfo> = await axios.post(url, {
         username,
@@ -27,10 +35,9 @@ function Login() {
         expiresInMins: 60,
       });
       const data = response.data;
-      console.log('User info:', data);
-      console.log(data.accessToken);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+      dispatch(loginSuccess(data));
+    } catch (error: any) {
+      dispatch(loginFailure(error.message));
     }
   };
 
@@ -55,7 +62,9 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="bg-black text-white mt-4 py-2 px-4">LOG IN</button>
+        <button className={`mt-4 py-2 px-4 text-white ${loading ? 'bg-gray-500' : 'bg-black'}`}>
+          {loading ? 'LOGGING IN...' : 'LOG IN'}
+        </button>
       </form>
     </div>
   );

@@ -19,7 +19,11 @@ export const loginUser = async (email: string, password: string): Promise<LoginR
       password,
     });
     return response.data;  // Return the user data with tokens and details
-  } catch (error: any) {
-    throw error.response ? error.response.data : error.message;  // Handle errors
+  } catch (error: unknown) {  // Use 'unknown' instead of 'any' for type safety
+    if (error instanceof Error) {
+      throw new Error(error.message);  // Handle generic error messages
+    } else {
+      throw new Error("An unknown error occurred during login.");
+    }
   }
 };
