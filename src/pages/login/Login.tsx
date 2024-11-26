@@ -15,16 +15,20 @@ function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const dispatch = useDispatch();
-  const { userInfo, isAuthenticated, loading, error, userToken } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const {
+    userInfo,
+    isAuthenticated,
+    loading,
+    error,
+    //  userToken
+  } = useSelector((state: RootState) => state.auth);
   const url = 'https://dummyjson.com/auth/login';
 
   useEffect(() => {
-    return () => {
+    if (!isAuthenticated) {
       dispatch(resetError());
-    };
-  }, [dispatch]);
+    }
+  }, [dispatch, isAuthenticated]);
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault();

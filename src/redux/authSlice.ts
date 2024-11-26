@@ -7,7 +7,6 @@ interface AuthState {
   loading: boolean;
   error: string | null;
   userToken: string | null;
-  // cart
 }
 
 const initialState: AuthState = {
@@ -16,7 +15,6 @@ const initialState: AuthState = {
   loading: false,
   error: null,
   userToken: null,
-  // cart: {items here}
 };
 
 const authSlice = createSlice({
