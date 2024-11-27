@@ -26,25 +26,25 @@ const CartItem: React.FC<CartItemProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-between p-4 border-b border-gray-200 hover:bg-gray-100">
+    <div className="flex flex-col sm:flex-row items-center justify-between p-4 border-b border-gray-200 hover:bg-gray-100">
       <div>
         {/* Product image */}
         <img
-          className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg"
+          className="flex-shrink-0 w-full h-full sm:w-24 sm:h-24 overflow-hidden rounded-lg"
           src={product.imageUrl}
           alt={product.name}
         />
       </div>
 
       {/* Product Details */}
-      <div className="flex-1 ml-4">
-        <p className="text-sm text-gray-400 mt-1">Product ID: {product.id}</p>
-        <h3 className="text-lg font-semibold">{product.name}</h3>
-        <h3 className="text-lg text-gray-500">${product.price}</h3>
+      <div className="flex-1 ml-0 mb-4 sm:mb-0 sm:ml-4">
+        <p className="text-sm text-center sm:text-left text-gray-400 mt-1">Product ID: {product.id}</p>
+        <h3 className="text-lg text-center sm:text-left font-semibold">{product.name}</h3>
+        <h3 className="text-lg text-center sm:text-left text-gray-500">${product.price}</h3>
       </div>
 
       {/* Quantity Controls and Delete Button */}
-      <div className="flex items-center gap-4 scale-75 md:scale-100">
+      <div className="flex flex-col sm:flex-row items-center gap-4">
         <div className="flex items-center space-x-2">
           <button
             onClick={handleQuantityDecrease}
