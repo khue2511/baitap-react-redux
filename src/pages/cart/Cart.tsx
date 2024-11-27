@@ -1,13 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { removeItemFromCart, updateItemQuantity } from '../../redux/cartSlice';
+import {
+  removeItemFromCart,
+  updateItemQuantity,
+} from '../../redux/cartSlice';
 import CartItem from './CartItem';
 
 const Cart: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalAmount = useSelector((state: RootState) => state.cart.totalAmount);
-  
+
   const dispatch = useDispatch();
 
   const handleRemoveItem = (productId: string) => {
@@ -26,7 +29,7 @@ const Cart: React.FC = () => {
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div className="space-y-4">
+        <div>
           {cartItems.map((item) => (
             <CartItem
               key={item.product.id}
@@ -36,9 +39,7 @@ const Cart: React.FC = () => {
             />
           ))}
           <div className="text-right">
-            <h2 className="text-xl font-bold">
-              Total Amount: ${totalAmount}
-            </h2>
+            <h2 className="text-xl font-bold mt-4">Total Amount: ${totalAmount}</h2>
           </div>
         </div>
       )}
