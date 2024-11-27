@@ -26,7 +26,7 @@ const Cart: React.FC = () => {
 
   return (
     <div className="container mx-auto my-4 p-4 border rounded-md shadow-lg">
-      <button onClick={() => dispatch(resetCart())}>Reset card</button>
+      <button onClick={() => dispatch(resetCart())}>Reset cart</button>
       <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>

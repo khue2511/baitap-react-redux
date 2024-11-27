@@ -44,7 +44,7 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
 
       {/* Quantity Controls and Delete Button */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 scale-75 md:scale-100">
         <div className="flex items-center space-x-2">
           <button
             onClick={handleQuantityDecrease}

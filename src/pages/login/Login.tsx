@@ -58,9 +58,9 @@ function Login() {
       {!isAuthenticated ? (
         <form
           onSubmit={login}
-          className="login-box flex flex-col items-center gap-y-2 mt-24 p-8 w-96 border border-neutral-400"
+          className="login-box flex flex-col items-center gap-y-2 mt-24 p-8 w-80 border border-neutral-400 xs:w-96"
         >
-          <h1 className="text-3xl font-bold ">Log in to TechShop</h1>
+          <h1 className="text-3xl font-bold text-center">Log in to TechShop</h1>
           <p>Enter your details below</p>
           <input
             className="w-full h-12 mt-6 p-4 border border-neutral-400"

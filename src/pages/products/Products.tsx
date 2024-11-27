@@ -26,14 +26,18 @@ const Products: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center m-auto pb-12 pt-8 px-24">
+    <div className="product-page-container flex flex-col items-center m-auto pb-12 pt-8">
       <h1 className="text-3xl font-bold">Our Products</h1>
       {loading ? (
         <div className="flex justify-center items-center h-screen">
           <div className="spinner-border animate-spin inline-block w-16 h-16 border-4 border-solid border-gray-200 border-t-gray-500 rounded-full" />
         </div>
       ) : (
-        <div className="flex flex-wrap justify-between gap-x-5 gap-y-8 mt-8">
+        <div
+          // className="flex flex-wrap gap-x-5 gap-y-5 mt-8"
+          // justify-between
+          className="products-list grid grid-cols-1 gap-x-6 gap-y-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+        >
           {products.map((product) => (
             <ProductCard
               key={product.id}

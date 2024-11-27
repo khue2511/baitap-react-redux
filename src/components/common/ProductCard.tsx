@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col border w-72">
+    <div className="product-card flex flex-col border max-w-72 rounded-md shadow-lg p-4">
       <div className="">
         <img
           className="w-full h-auto"
@@ -40,7 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           alt={name}
         ></img>
       </div>
-      <div className="flex flex-col p-4 gap-y-1 justify-between h-full">
+      <div className="flex flex-col justify-between mt-4 gap-y-1 h-full">
         <div>
           <p className="text-3xl font-bold">
             ${price}{' '}

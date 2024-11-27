@@ -20,7 +20,7 @@ function Navbar() {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between border p-8">
+    <div className="navbar flex flex-row items-center justify-between border p-8">
       <div>
         <Link
           to="/"
