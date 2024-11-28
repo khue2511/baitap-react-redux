@@ -22,6 +22,8 @@ const CartItem: React.FC<CartItemProps> = ({
   const handleQuantityDecrease = () => {
     if (quantity > 1) {
       onQuantityChange(product.id, quantity - 1);
+    } else {
+      onRemove(product.id);
     }
   };
 
@@ -38,27 +40,30 @@ const CartItem: React.FC<CartItemProps> = ({
 
       {/* Product Details */}
       <div className="flex-1 ml-0 mb-4 sm:mb-0 sm:ml-4">
-        <p className="text-sm text-center sm:text-left text-gray-400 mt-1">Product ID: {product.id}</p>
-        <h3 className="text-lg text-center sm:text-left font-semibold">{product.name}</h3>
-        <h3 className="text-lg text-center sm:text-left text-gray-500">${product.price}</h3>
+        <p className="text-sm text-center sm:text-left text-gray-400 mt-1">
+          Product ID: {product.id}
+        </p>
+        <h3 className="text-lg text-center sm:text-left font-semibold">
+          {product.name}
+        </h3>
+        <h3 className="text-lg text-center sm:text-left text-gray-500">
+          ${product.price}
+        </h3>
       </div>
 
       {/* Quantity Controls and Delete Button */}
       <div className="flex flex-col sm:flex-row items-center gap-4">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-x-1">
           <button
             onClick={handleQuantityDecrease}
-            className="w-8 h-8 flex items-center justify-center text-white bg-gray-500 rounded-full hover:bg-gray-600 disabled:bg-gray-300"
-            disabled={quantity <= 1}
+            className="border border-gray-400 rounded w-8 h-8 disabled:cursor-not-allowed"
           >
             -
           </button>
-          <span className="w-10 h-10 flex items-center justify-center text-lg font-semibold border rounded-md border-gray-300">
-            {quantity}
-          </span>
+          <span className="w-8 h-8 flex items-center justify-center">{quantity}</span>
           <button
             onClick={handleQuantityIncrease}
-            className="w-8 h-8 flex items-center justify-center text-white bg-gray-500 rounded-full hover:bg-gray-600 disabled:bg-gray-300"
+            className="border border-gray-400 rounded w-8 h-8 disabled:cursor-not-allowed disabled:text-gray-300 disabled:border-gray-300"
             disabled={quantity === product.quantity}
           >
             +

@@ -6,6 +6,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DevicesIcon from '@mui/icons-material/Devices';
 import MenuIcon from '@mui/icons-material/Menu';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/authSlice';
 import { RootState } from '../../redux/store';
@@ -63,6 +64,13 @@ function Navbar() {
             >
               <StoreIcon />
               <p>Products</p>
+            </Link>
+            <Link
+              to="/orders"
+              className="flex flex-col items-center p-2 hover:text-sky-700 cursor-pointer"
+            >
+              <ReceiptIcon />
+              <p>Your Orders</p>
             </Link>
             <Link
               to="/cart"

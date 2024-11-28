@@ -4,9 +4,10 @@ import { RootState } from '../../redux/store';
 import {
   removeItemFromCart,
   updateItemQuantity,
-  // resetCart,
+  resetCart,
 } from '../../redux/cartSlice';
 import CartItem from './CartItem';
+import axios from 'axios';
 
 const Cart: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -24,9 +25,32 @@ const Cart: React.FC = () => {
     }
   };
 
+  const createOrder = async () => {
+    const orderData = {
+      items: cartItems,
+      totalAmount,
+      status: 'pending', 
+    };
+
+    try {
+      const response = await axios.post(
+        'https://673d96620118dbfe8607db5e.mockapi.io/api/orders',
+        orderData,
+      );
+
+      if (response.status === 201) {
+        alert('Order placed successfully!');
+        // You may also want to clear the cart here or redirect the user
+        dispatch(resetCart()); 
+      }
+    } catch (error) {
+      console.error('Error creating order:', error);
+      alert('There was an error placing your order. Please try again.');
+    }
+  };
+
   return (
     <div className="container mx-auto my-4 p-4 border rounded-md shadow-lg">
-      {/* <button onClick={() => dispatch(resetCart())}>Reset cart</button> */}
       <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -41,8 +65,16 @@ const Cart: React.FC = () => {
             />
           ))}
           <div className="text-right">
-            <h2 className="text-xl font-bold mt-4">Total Amount: ${totalAmount}</h2>
+            <h2 className="text-xl font-bold mt-4">
+              Total Amount: ${totalAmount}
+            </h2>
           </div>
+          <button
+            className="block ml-auto mt-4 px-4 py-2 border bg-black text-white hover:bg-white hover:text-black transition duration-100"
+            onClick={createOrder}
+          >
+            Place Order
+          </button>
         </div>
       )}
     </div>

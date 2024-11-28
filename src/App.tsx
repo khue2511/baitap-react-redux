@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import ProtectedRoute from './utils/ProtectedRoute';
 import NotFoundPage from './pages/NotFoundPage';
+import Orders from './pages/orders';
 
 function App() {
   const isAuthenticated = useSelector(
@@ -35,6 +36,10 @@ function App() {
             <Route
               path="/products"
               element={<Products />}
+            />
+             <Route
+              path="/orders"
+              element={<Orders />}
             />
             <Route
               path="/cart"
