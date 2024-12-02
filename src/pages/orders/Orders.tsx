@@ -28,10 +28,21 @@ const Orders: React.FC = () => {
     try {
       await axios.delete(`${url}/orders/${orderId}`);
       window.location.reload();
-    }  catch (error) {
+    } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }
+  };
+
+  const handleCheckoutOrder = async (orderId: string) => {
+    try {
+      await axios.put(`${url}/orders/${orderId}`, {
+        status: 'confirmed',
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   return (
     <div className="container mx-auto mb-4">
@@ -45,7 +56,7 @@ const Orders: React.FC = () => {
           {orders.length === 0 ? (
             <h1>You do not have any orders</h1>
           ) : (
-            <div className='flex flex-col gap-y-8'>
+            <div className="flex flex-col gap-y-8">
               {orders.map((order) => (
                 <OrderDetailCard
                   key={order.id}
@@ -54,6 +65,7 @@ const Orders: React.FC = () => {
                   totalAmount={order.totalAmount}
                   status={order.status}
                   onCancelOrder={() => handleCancelOrder(order.id)}
+                  onCheckoutOrder={() => handleCheckoutOrder(order.id)}
                 />
               ))}
             </div>

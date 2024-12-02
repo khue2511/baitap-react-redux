@@ -8,26 +8,38 @@ interface OrderDetailCardProps {
   status: string;
   id: string;
   onCancelOrder: (id: string) => void;
+  onCheckoutOrder: (id: string) => void;
 }
-
-
 
 const OrderDetailCard: React.FC<OrderDetailCardProps> = ({
   items,
   totalAmount,
   status,
   id,
-  onCancelOrder
+  onCancelOrder,
+  onCheckoutOrder,
 }) => {
   const handleCancelOrder = () => {
     onCancelOrder(id);
-  }
+  };
+
+  const handleCheckoutOrder = () => {
+    onCheckoutOrder(id);
+  };
 
   return (
     <div className="border rounded shadow-lg">
       <p className="flex items-center gap-x-2 p-4 border-b">
         <span className="text-lg font-bold"> Order ID: {id}</span>
-        <span className="font-semibold text-xs bg-zinc-200 px-3.5 py-1 rounded-3xl">
+        <span
+          className={`font-semibold text-xs px-3.5 py-1 rounded-3xl ${
+            status === 'pending'
+              ? 'bg-zinc-200'
+              : status === 'confirmed'
+                ? 'bg-green-500 text-white'
+                : 'bg-default'
+          } `}
+        >
           {status}
         </span>
       </p>
@@ -74,14 +86,25 @@ const OrderDetailCard: React.FC<OrderDetailCardProps> = ({
         </p>
         <span className="text-right text-xl font-bold">${totalAmount}</span>
       </div>
-      <div className="flex justify-end gap-x-4 border-b p-4">
-        <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-100" onClick={handleCancelOrder}>
-          Cancel Order
-        </button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-100">
-          <ShoppingCartCheckoutIcon />  Checkout
-        </button>
-      </div>
+
+      {status == 'pending' ? (
+        <div className="flex justify-end gap-x-4 border-b p-4">
+          <button
+            className="bg-red-500 text-white px-4 py-2 hover:bg-red-700 transition duration-100"
+            onClick={handleCancelOrder}
+          >
+            Cancel Order
+          </button>
+          <button
+            className="bg-black text-white px-4 py-2 hover:bg-white hover:text-black border transition duration-100"
+            onClick={handleCheckoutOrder}
+          >
+            <ShoppingCartCheckoutIcon /> Checkout
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

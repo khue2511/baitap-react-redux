@@ -40,7 +40,6 @@ const Cart: React.FC = () => {
 
       if (response.status === 201) {
         alert('Order placed successfully!');
-        // You may also want to clear the cart here or redirect the user
         dispatch(resetCart()); 
       }
     } catch (error) {
